@@ -1,25 +1,25 @@
 <?php
-    $con = mysqli_connect("mysql10.000webhost.com", "a3288368_user", "abcd1234", "a3288368_data");
+    $con = mysqli_connect("localhost:3306", "id5746023_123456789", "sarata2015", "id5746023_biswajit");
     
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $EmailID = $_POST["EmailID"];
+    $Password = $_POST["Password"];
     
-    $statement = mysqli_prepare($con, "SELECT * FROM user WHERE username = ? AND password = ?");
-    mysqli_stmt_bind_param($statement, "ss", $username, $password);
+    $statement = mysqli_prepare($con, "SELECT * FROM 123456789 WHERE EmailID = ? AND Password = ?");
+    mysqli_stmt_bind_param($statement, "ss", $EmailID, $Password);
     mysqli_stmt_execute($statement);
     
     mysqli_stmt_store_result($statement);
-    mysqli_stmt_bind_result($statement, $userID, $name, $age, $username, $password);
+    mysqli_stmt_bind_result($statement, $user_ID, $UpperName, $LowerName, $EmailID, $Password);
     
     $response = array();
     $response["success"] = false;  
     
     while(mysqli_stmt_fetch($statement)){
         $response["success"] = true;  
-        $response["name"] = $name;
-        $response["age"] = $age;
-        $response["username"] = $username;
-        $response["password"] = $password;
+        $response["UpperName"] = $UpperName;
+        $response["LowerName"] = $LowerName;
+        $response["EmailID"] = $EmailID;
+        $response["Password"] = $Password;
     }
     
     echo json_encode($response);
